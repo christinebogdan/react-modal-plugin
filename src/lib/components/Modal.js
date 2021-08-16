@@ -6,7 +6,7 @@ import {
 } from "./Style";
 import React, { useEffect } from "react";
 
-function Modal({
+export function Modal({
   showClose = true,
   escapeClose = true,
   clickClose = true,
@@ -100,5 +100,3 @@ function Modal({
     </ModalBackdrop>
   );
 }
-
-export default Modal;
