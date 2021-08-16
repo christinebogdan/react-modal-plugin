@@ -9,7 +9,7 @@ import {
 } from "./components/Style";
 import React, { useEffect } from "react";
 
-export function Modal({
+export default function Modal({
   showClose = true,
   escapeClose = true,
   clickClose = true,
