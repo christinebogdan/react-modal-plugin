@@ -5,7 +5,7 @@ require("core-js/modules/web.dom-collections.iterator.js");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.Modal = Modal;
 
 var _Style = require("./Style");
 
@@ -95,6 +95,3 @@ function Modal(_ref) {
     }
   }, "+"))));
 }
-
-var _default = Modal;
-exports.default = _default;
