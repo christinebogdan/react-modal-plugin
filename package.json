@@ -21,13 +21,13 @@
     "type": "git",
     "url": "https://github.com/christinebogdan/react-modal-plugin.git"
   },
-  "dependencies": {},
-  "peerDependencies": {
+  "dependencies": {
     "react-scripts": "4.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "styled-components": "^5.3.0"
   },
+  "peerDependencies": {},
   "scripts": {
     "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files"
   },
