@@ -15,6 +15,7 @@ export default function Modal({
   clickClose = true,
   closeText = false,
   animation = false,
+  blockScrolling = true,
   modalCloseButtonStyle,
   modalTextButtonStyle,
   modalContainerStyle,
@@ -27,7 +28,7 @@ export default function Modal({
   useEffect(() => {
     if (show) {
       modalCloseButton.current.focus();
-      block();
+      if (blockScrolling) block();
     }
   });
 
@@ -47,10 +48,9 @@ export default function Modal({
       e.type === "keydown" &&
       (e.key === "Enter" || (escapeClose && e.key === "Escape"))
     ) {
-      console.log(e);
       toggle();
     }
-    unblock();
+    if (blockScrolling) unblock();
   };
 
   return (
@@ -64,7 +64,7 @@ export default function Modal({
         onClick={(e) => {
           e.stopPropagation();
         }}
-        closeText={closeText}
+        // closeText={closeText}
         animation={animation}
         customStyle={modalContainerStyle}
       >
@@ -74,7 +74,7 @@ export default function Modal({
           onClick={
             closeText.eventHandling
               ? () => {
-                  unblock();
+                  if (blockScrolling) unblock();
                   closeText.eventHandling();
                 }
               : close
