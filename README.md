@@ -1,70 +1,140 @@
-# Getting Started with Create React App
+# About this modal plugin
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple plugin that contains a modal component for react projects.
 
-## Available Scripts
+- The plugin renders a **pre-styled modal**
+- In the background, it consists of
+  1. a Modal backdrop component
+  2. a Modal container component
+  3. a Modal close button component (optional)
+  4. a Modal text button component (optional)
+- **Custom style can be easily applied**
 
-In the project directory, you can run:
+## Installation
 
-### `npm start`
+You can install the [react-modal-plugin](https://www.npmjs.com/package/@christinebogdan/react-modal-plugin1) with npm:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`npm install @christinebogdan/react-modal-plugin1`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Using the plugin
 
-### `npm test`
+### The content
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Simply import the plugin into the file where you would like to use the modal with and **set its children** to your modal content.
 
-### `npm run build`
+Example:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+<Modal>
+    <h1>Congratulations!</h1>
+    <p>You've created a modal!</p>
+</Modal>
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### The functionality
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The modal functionality is handled by the local state of the modal's parent. Therefore, the **parent component requires state**. I have used showModal and setShowModal as variable names, but you can call them whatever you like.
 
-### `npm run eject`
+**Important:** The initial state is set to false.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The state is communicated to the Modal via the the **"show" prop**.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The **"toggle" prop** receives the setShowModal as value. This enables the Modal to be closed on button click.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+function parentComponent(props) {
+  const [showModal, setShowModal] = useState(false);
+}
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+// (remaining code)
 
-## Learn More
+return (
+    <SomeOtherComponent>
+        <Modal
+            show={showModal}
+            toggle={setShowModal}>
+                <h1>Congratulations!</h1>
+                <p>You've created a modal!</p>
+        </Modal>
+    </SomeOthercomponent>
+)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Custom Styling
 
-### Code Splitting
+The props "modalBackdropStyle", "modalContainerStyle", "modalCloseButtonStyle" and "modalTextButtonStyle" enable custom styling. The values can be passed in as normal **CSS syntax wrapped in a template literal**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+<Modal
+    show={showModal}
+    toggle={setShowModal}
+    modalBackdropStyle={`background-color: yellow; opacity: 0.4`}
+    >
+        <h1>Congratulations!</h1>
+        <p>You've created a modal!</p>
+</Modal>
+```
 
-### Analyzing the Bundle Size
+The modal comes with a **built-in animation effect** that can be turned on by setting the "animation" prop to true.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+<Modal
+    show={showModal}
+    toggle={setShowModal}
+    modalBackdropStyle={`background-color: yellow; opacity: 0.4`}
+    animation={true}
+    >
+        <h1>Congratulations!</h1>
+        <p>You've created a modal!</p>
+</Modal>
+```
 
-### Making a Progressive Web App
+### Buttons
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### X-close button
 
-### Advanced Configuration
+Per default the modal is rendered with the usual x-close button. This can be turned off by setting the "showClose" prop to false.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### Additional button
 
-### Deployment
+The modal can be rendered with an additional button via the "closeText" prop. This prop takes an object as its value with the two keys **text** and **eventHandling**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**text:** The text value determines the button text and is **required**.
 
-### `npm run build` fails to minify
+**eventHandling:** If passed in a value, the function will be called on button click. Otherwise the button click **defaults to closing the modal**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+<Modal
+    show={showModal}
+    toggle={setShowModal}
+    modalBackdropStyle={`background-color: yellow; opacity: 0.4`}
+    animation={true}
+    closeText={{text: "I'm an additional button", eventHandling: customEventHandler}}
+    >
+        <h1>Congratulations!</h1>
+        <p>You've created a modal!</p>
+</Modal>
+```
+
+### Closing event types
+
+Per default, the modal can be claused either via click, or via Escape key. This can be adjusted using the "clickclose" and "escapeClose" props. Both default to "true". If set to false, the functionality is turned off.
+
+**Important:** In case you deactivate both, clickClose and escapeClose, you should set "closeText" to true and pass in a custom event handler.
+
+### Overview
+
+| Prop                  |              | Default                  | Description                                                                                                                   |
+| --------------------- | ------------ | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| animation             | _optional_   | false                    | When set to true, modal appears with a short fade-in animation                                                                |
+| clickClose            | _optional_   | true                     | When set to false, mocal cannot be closed on click                                                                            |
+| closeText             | _optional_   | false                    | adds an additional button to the modal with the option to add custom event handling                                           |
+| escapeClose           | _optional_   | true                     | When set to false, modal cannot be closed via Escape key                                                                      |
+| modalBackdropStyle    | _optional_   | pre-styled               | Contains custom styling for the modal backdrop                                                                                |
+| modalCloseButtonStyle | _optional_   | pre-styled               | Contains custom styling for the close button                                                                                  |
+| modalContainerStyle   | _optional_   |  pre-styled              | Contains custom styling for the modal container                                                                               |
+| modalTextButtonStyle  | _optional_   | pre-styled               | Contains custom styling for the optional additional button                                                                    |
+| show                  | **required** | false                    | Determines wheter the modal is displayed, or not. Depends on the parent's local state.                                        |
+| showClose             | _optional_   | true                     | When set to false, no close button is displayed                                                                               |
+| toggle                | **required** | function to update state | Hands the function to update the parent's local state to the Modal Component to be used as event Handler for the close button |
