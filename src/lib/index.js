@@ -1,12 +1,9 @@
-// import { Modal } from "./components/Modal";
-
-// export default Modal;
 import {
   ModalBackdrop,
   ModalContainer,
   ModalCloseButton,
   ModalTextButton,
-} from "./components/Style";
+} from "./Style";
 import React, { useEffect } from "react";
 
 export default function Modal({
