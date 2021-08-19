@@ -21,7 +21,7 @@ import React, { useEffect } from "react";
  * @param {boolean} [showClose=true] - The state of displaying the X-close button
  * @param {boolean} [escapeClose=true] - The state of closing the modal via Escape button
  * @param {boolean} [clickClose=true] - The state of closing the modal via click
- * @param {Object} [closeText] - The state of displaying an additional button
+ * @param {Object} [closeText] - Object with content to display an additional button (text and event handling)
  * @param {string} [closeText.text] - The text to be displayed on additional button
  * @param {closeTextEventHandling} [closetext.eventHandling] - A custom event handler for the additional button
  * @param {boolean} [animation=false] - The state of animating the modal display

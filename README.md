@@ -35,11 +35,12 @@ Example:
 
 The modal functionality is handled by the local state of the modal's parent. Therefore, the **parent component requires state**. I have used showModal and setShowModal as variable names, but you can call them whatever you like.
 
-**Important:** The initial state is set to false.
+**Important:** The initial state should be set to false.
 
-The state is communicated to the Modal via the the **"show" prop**.
+The "show" prop communicates the parent's state to the modal.
+The "toggle" prop receives the setShowModal as value. This enables the modal to be closed on button click.
 
-The **"toggle" prop** receives the setShowModal as value. This enables the Modal to be closed on button click.
+Both, "show" and "toggle" are required.
 
 ```
 function parentComponent(props) {
@@ -69,12 +70,14 @@ The props "modalBackdropStyle", "modalContainerStyle", "modalCloseButtonStyle" a
 <Modal
     show={showModal}
     toggle={setShowModal}
-    modalBackdropStyle={`background-color: yellow; opacity: 0.4`}
+    modalBackdropStyle={"background-color: yellow; opacity: 0.4"}
     >
         <h1>Congratulations!</h1>
         <p>You've created a modal!</p>
 </Modal>
 ```
+
+### Animation
 
 The modal comes with a **built-in animation effect** that can be turned on by setting the "animation" prop to true.
 
@@ -82,13 +85,17 @@ The modal comes with a **built-in animation effect** that can be turned on by se
 <Modal
     show={showModal}
     toggle={setShowModal}
-    modalBackdropStyle={`background-color: yellow; opacity: 0.4`}
+    modalBackdropStyle={"background-color: yellow; opacity: 0.4"}
     animation={true}
     >
         <h1>Congratulations!</h1>
         <p>You've created a modal!</p>
 </Modal>
 ```
+
+### Scrolling
+
+The prop "blockScrolling" determines, whether the body is scrollable while the modal is open. Its default value is set to true.
 
 ### Buttons
 
@@ -119,22 +126,25 @@ The modal can be rendered with an additional button via the "closeText" prop. Th
 
 ### Closing event types
 
-Per default, the modal can be claused either via click, or via Escape key. This can be adjusted using the "clickclose" and "escapeClose" props. Both default to "true". If set to false, the functionality is turned off.
+Per default, the modal can be claused either via click, or via Escape key. This can be adjusted using the "clickClose" and "escapeClose" props. Both default to "true". If set to false, the functionality is turned off.
 
-**Important:** In case you deactivate both, clickClose and escapeClose, you should set "closeText" to true and pass in a custom event handler.
+**Important:** In case you deactivate both, clickClose and escapeClose, you should define an object for the "closeText" prop and pass in a custom event handler. Otherwise, you will not be able to close the modal.
 
 ### Overview
 
-| Prop                  |              | Default                  | Description                                                                                                                   |
-| --------------------- | ------------ | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| animation             | _optional_   | false                    | When set to true, modal appears with a short fade-in animation                                                                |
-| clickClose            | _optional_   | true                     | When set to false, mocal cannot be closed on click                                                                            |
-| closeText             | _optional_   | false                    | adds an additional button to the modal with the option to add custom event handling                                           |
-| escapeClose           | _optional_   | true                     | When set to false, modal cannot be closed via Escape key                                                                      |
-| modalBackdropStyle    | _optional_   | pre-styled               | Contains custom styling for the modal backdrop                                                                                |
-| modalCloseButtonStyle | _optional_   | pre-styled               | Contains custom styling for the close button                                                                                  |
-| modalContainerStyle   | _optional_   |  pre-styled              | Contains custom styling for the modal container                                                                               |
-| modalTextButtonStyle  | _optional_   | pre-styled               | Contains custom styling for the optional additional button                                                                    |
-| show                  | **required** | false                    | Determines wheter the modal is displayed, or not. Depends on the parent's local state.                                        |
-| showClose             | _optional_   | true                     | When set to false, no close button is displayed                                                                               |
-| toggle                | **required** | function to update state | Hands the function to update the parent's local state to the Modal Component to be used as event Handler for the close button |
+| Prop                    | Type     | Required?                                   | Default                  | Description                                                                                                                                                                     | Example                                                               |
+| ----------------------- | -------- | ------------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| animation               | boolean  | _optional_                                  | false                    | When set to true, modal appears with a short fade-in animation.                                                                                                                 | animation={true}                                                      |
+| blockScrolling          | boolean  | optional                                    | true                     | When set to false, the body will be scrollable while the modal is open.                                                                                                         | blockScrolling={false}                                                |
+| clickClose              | boolean  | _optional_                                  | true                     | When set to false, modal cannot be closed on click.                                                                                                                             | clickClose={false}                                                    |
+| closeText               | Object   | _optional_                                  | undefined                | Object, that adds an additional button to the modal with the option to add custom event handling (closeText = {text: _string_, eventHandling: _function_}).                     | closeText={{text: "I'm a button", eventHandling: customEventHandler}} |
+| closeText.text          | string   | **required** (if additional button is used) | -                        | The text to be displayed on the additional button.                                                                                                                              |
+| closeText.eventHandling | function | _optional_                                  | function to close modal  | A custom event handler for the button.                                                                                                                                          |
+| escapeClose             | boolean  | _optional_                                  | true                     | When set to false, modal cannot be closed via Escape key                                                                                                                        | escapeClose={false}                                                   |
+| modalBackdropStyle      | string   | _optional_                                  | pre-styled               | Contains custom styling for the modal backdrop.                                                                                                                                 | modalBackdropStyle={"background: yellow, opacity: 0.4"}               |
+| modalCloseButtonStyle   | string   | _optional_                                  | pre-styled               | Contains custom styling for the close button.                                                                                                                                   |                                                                       |
+| modalContainerStyle     | string   | _optional_                                  |  pre-styled              | Contains custom styling for the modal container.                                                                                                                                |                                                                       |
+| modalTextButtonStyle    | string   | _optional_                                  | pre-styled               | Contains custom styling for the optional additional button.                                                                                                                     |                                                                       |
+| show                    | boolean  | **required**                                | false                    | Determines whether the modal is displayed, or not. Depends on the respective variable value in the parent's local state.                                                        | show={showModal}                                                      |
+| showClose               | boolean  | _optional_                                  | true                     | When set to false, no close button is displayed.                                                                                                                                | showClose={false}                                                     |
+| toggle                  | boolean  | **required**                                | function to update state | Hands the function that updates the show variable in the parent's local state to the modal component. In the modal component, it is used as event handler for the close button. | toggle={setShowModal}                                                 |
