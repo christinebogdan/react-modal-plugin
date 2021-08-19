@@ -121,7 +121,8 @@ export default function Modal({
           closeText={closeText}
           onClick={
             closeText.eventHandling
-              ? () => {
+              ? (e) => {
+                  e.stopPropagation();
                   if (blockScrolling) unblock();
                   closeText.eventHandling();
                 }
