@@ -17,7 +17,7 @@ import React, { useEffect } from "react";
  */
 
 /**
- * Function component that renders the modal HTML elements
+ * Function component that renders the modal HTML elements.
  * @param {boolean} [showClose=true] - The state of displaying the X-close button
  * @param {boolean} [escapeClose=true] - The state of closing the modal via Escape button
  * @param {boolean} [clickClose=true] - The state of closing the modal via click
