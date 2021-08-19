@@ -9,7 +9,7 @@
     "ui",
     "modal"
   ],
-  "version": "0.2.10",
+  "version": "0.2.11",
   "homepage": "https://github.com/christinebogdan/react-modal-plugin#readme",
   "license": "MIT",
   "private": false,
