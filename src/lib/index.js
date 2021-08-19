@@ -86,6 +86,7 @@ export default function Modal({
    */
   const close = (e) => {
     e.preventDefault();
+    console.log(e);
     if (clickClose && e.type === "click") {
       toggle();
     }
