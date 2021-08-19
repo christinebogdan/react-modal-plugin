@@ -88,7 +88,6 @@ export default function Modal({
    */
   const close = (e) => {
     e.preventDefault();
-    e.stopPropagation();
     console.log(e);
     if (clickClose && e.type === "click") {
       toggle();
@@ -121,8 +120,7 @@ export default function Modal({
           closeText={closeText}
           onClick={
             closeText.eventHandling
-              ? (e) => {
-                  e.stopPropagation();
+              ? () => {
                   if (blockScrolling) unblock();
                   closeText.eventHandling();
                 }
