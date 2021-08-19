@@ -8,8 +8,7 @@ import React, { useEffect } from "react";
 
 /**
  * Callback for the closetext.eventHandling key
- * @callback closeText-eventHandling
- * @returns
+ * @callback closeTextEventHandling
  */
 
 /**
@@ -18,13 +17,13 @@ import React, { useEffect } from "react";
  */
 
 /**
- *
+ * Function component that renders the modal HTML elements
  * @param {boolean} [showClose=true] - The state of displaying the X-close button
  * @param {boolean} [escapeClose=true] - The state of closing the modal via Escape button
  * @param {boolean} [clickClose=true] - The state of closing the modal via click
- * @param {Object} [closeText=false] - The state of displaying an additional button
+ * @param {Object} [closeText] - The state of displaying an additional button
  * @param {string} [closeText.text] - The text to be displayed on additional button
- * @param {closeText-eventHandling} [closetext.eventHandling] - A custom event handler for the additional button
+ * @param {closeTextEventHandling} [closetext.eventHandling] - A custom event handler for the additional button
  * @param {boolean} [animation=false] - The state of animating the modal display
  * @param {boolean} [blockScrolling=true] - The state of keeping the body scrollable while modal is displayed
  * @param {string} [modalCloseButtonStyle=""] - The custom style for the X-close button
@@ -32,14 +31,14 @@ import React, { useEffect } from "react";
  * @param {string} [modalContainerStyle=""] - The custom style for the modal container
  * @param {string} [modalBackdropStyle=""] - The custom style for the modal backdrop
  * @param {boolean} show - The state of displaying the modal
- * @param {setShowModal} - The callback that handles the modal's parent's local state to show or hide modal
- * @returns {HTMLElement}
+ * @param {setShowModal} setShowModal - The callback that handles the modal's parent's local state to show or hide modal
+ * @returns {HTMLElement} The modal HTML elements (incl. backdrop, container, X-close button and additional button)
  */
 export default function Modal({
   showClose = true,
   escapeClose = true,
   clickClose = true,
-  closeText = false,
+  closeText = undefined,
   animation = false,
   blockScrolling = true,
   modalCloseButtonStyle = "",
@@ -59,7 +58,10 @@ export default function Modal({
   useEffect(() => {
     if (show) {
       modalCloseButton.current.focus();
-      if (blockScrolling) block();
+      if (blockScrolling) {
+        console.log(blockScrolling);
+        block();
+      }
     }
   });
 
