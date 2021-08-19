@@ -63,7 +63,7 @@ return (
 
 ### Custom Styling
 
-The props "modalBackdropStyle", "modalContainerStyle", "modalCloseButtonStyle" and "modalTextButtonStyle" enable custom styling. The values can be passed in as normal **CSS syntax wrapped in a template literal**.
+The props "modalBackdropStyle", "modalContainerStyle", "modalCloseButtonStyle" and "modalTextButtonStyle" enable custom styling. The values can be passed in as a string as normal **CSS syntax**.
 
 ```
 <Modal
