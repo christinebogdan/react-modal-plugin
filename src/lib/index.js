@@ -56,7 +56,7 @@ export default function Modal({
    * to overflow = hidden.
    */
   useEffect(() => {
-    console.log(blockScrolling);
+    console.log("hello", blockScrolling);
     if (show) {
       modalCloseButton.current.focus();
       if (blockScrolling) {
