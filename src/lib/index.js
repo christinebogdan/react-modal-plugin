@@ -56,10 +56,12 @@ export default function Modal({
    * to overflow = hidden.
    */
   useEffect(() => {
+    // why does this not log "hello"?
     console.log("hello", blockScrolling);
     if (show) {
       modalCloseButton.current.focus();
       if (blockScrolling) {
+        // why does this not log?
         console.log(blockScrolling);
         block();
       }
@@ -86,6 +88,7 @@ export default function Modal({
    */
   const close = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     console.log(e);
     if (clickClose && e.type === "click") {
       toggle();
