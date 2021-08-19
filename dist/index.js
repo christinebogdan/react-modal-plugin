@@ -69,15 +69,10 @@ function Modal(_ref) {
 
 
   (0, _react.useEffect)(() => {
-    // why does this not log "hello"?
-    console.log("hello", blockScrolling);
-
     if (show) {
       modalCloseButton.current.focus();
 
       if (blockScrolling) {
-        // why does this not log?
-        console.log(blockScrolling);
         block();
       }
     }
@@ -98,14 +93,13 @@ function Modal(_ref) {
     document.body.style.overflow = "visible";
   };
   /**
-   * Closing the modal
+   * Closing the modal. If blockScrolling is true, then body style overflow is set to visible.
    * @param {Object} e - The emitted event
    */
 
 
   const close = e => {
     e.preventDefault();
-    console.log(e);
 
     if (clickClose && e.type === "click") {
       toggle();
