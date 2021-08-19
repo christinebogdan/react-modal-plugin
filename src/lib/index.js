@@ -91,14 +91,15 @@ export default function Modal({
     console.log(e);
     if (clickClose && e.type === "click") {
       toggle();
+      if (blockScrolling) unblock();
     }
     if (
       e.type === "keydown" &&
       (e.key === "Enter" || (escapeClose && e.key === "Escape"))
     ) {
       toggle();
+      if (blockScrolling) unblock();
     }
-    if (blockScrolling) unblock();
   };
 
   return (

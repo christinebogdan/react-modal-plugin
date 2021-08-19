@@ -109,13 +109,13 @@ function Modal(_ref) {
 
     if (clickClose && e.type === "click") {
       toggle();
+      if (blockScrolling) unblock();
     }
 
     if (e.type === "keydown" && (e.key === "Enter" || escapeClose && e.key === "Escape")) {
       toggle();
+      if (blockScrolling) unblock();
     }
-
-    if (blockScrolling) unblock();
   };
 
   return /*#__PURE__*/_react.default.createElement(_Style.ModalBackdrop, {
