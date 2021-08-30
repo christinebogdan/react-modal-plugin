@@ -125,12 +125,12 @@ function Modal(_ref) {
     customStyle: modalContainerStyle
   }, children, /*#__PURE__*/_react.default.createElement(_Style.ModalTextButton, {
     closeText: closeText,
-    onClick: closeText.eventHandling ? () => {
+    onClick: closeText !== null && closeText !== void 0 && closeText.eventHandling ? () => {
       if (blockScrolling) unblock();
       closeText.eventHandling();
     } : close,
     customStyle: modalTextButtonStyle
-  }, closeText.text), /*#__PURE__*/_react.default.createElement(_Style.ModalCloseButton, {
+  }, closeText === null || closeText === void 0 ? void 0 : closeText.text), /*#__PURE__*/_react.default.createElement(_Style.ModalCloseButton, {
     ref: modalCloseButton,
     onClick: close,
     onKeyDown: close,
