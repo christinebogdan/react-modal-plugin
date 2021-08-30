@@ -115,7 +115,7 @@ export default function Modal({
         <ModalTextButton
           closeText={closeText}
           onClick={
-            closeText.eventHandling
+            closeText?.eventHandling
               ? () => {
                   if (blockScrolling) unblock();
                   closeText.eventHandling();
@@ -124,7 +124,7 @@ export default function Modal({
           }
           customStyle={modalTextButtonStyle}
         >
-          {closeText.text}
+          {closeText?.text}
         </ModalTextButton>
         <ModalCloseButton
           ref={modalCloseButton}
